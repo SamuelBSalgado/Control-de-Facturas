@@ -8,7 +8,7 @@ let connection = mysql.createConnection({
 });
 connection.connect();
 
-connection.query(
+/*connection.query(
     `
     CREATE TABLE Clientes(
         id int AUTO_INCREMENT, 
@@ -57,5 +57,33 @@ connection.query(
         console.log(results);
         console.log(fields);
     }
-});
+});*/
+
+let cliente = {
+    Nombre:'Nepomuceno',
+    RFC:'NEPO231010',
+    Ciudad:'Colima',
+    CP: 28018,
+    Email:'CorreoNEP'
+};
+
+let fac_name = cliente.Nombre;
+let fac_RFC = cliente.RFC;
+let fac_Ciudad = cliente.Ciudad;
+let fac_CP = cliente.CP;
+let fac_Email = cliente.Email;
+
+connection.query(`
+INSERT INTO Clientes (Nombre, RFC, Ciudad, CP) 
+    VALUES (${fac_name}, ${fac_RFC}, ${fac_Ciudad}, ${fac_CP}, ${fac_Email});
+`, function(error, results, fields){
+        if (error){
+            throw error;
+        } else{
+            console.log(results);
+            console.log(fields);
+        }
+    }
+);
+
 connection.end();
